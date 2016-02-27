@@ -10,7 +10,7 @@ import com.example.test.lottery.net.protocal.element.CurrentIssueElement;
 /**
  * Created by test on 2016/2/26.
  */
-public class XmlText extends InstrumentationTestCase {
+public class XmlTest extends InstrumentationTestCase {
     private static final String TAG = "XmlTest";
 
     public void testcreateXML()
