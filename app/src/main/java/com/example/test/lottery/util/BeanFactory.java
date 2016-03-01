@@ -29,13 +29,13 @@ public class BeanFactory {
 
      */
 
-    public static UserEngine getImpl(Class clazz){
+    public static<T> T  getImpl(Class<T> clazz){
 
 
          String key =  clazz.getSimpleName();
          String className = properties.getProperty(key);
         try {
-            return (UserEngine) Class.forName(className).newInstance();
+            return (T) Class.forName(className).newInstance();
 
         } catch (Exception e) {
             e.printStackTrace();
