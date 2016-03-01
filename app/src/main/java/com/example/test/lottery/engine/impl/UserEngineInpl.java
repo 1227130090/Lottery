@@ -1,9 +1,11 @@
-package com.example.test.lottery.engine;
+package com.example.test.lottery.engine.impl;
 
 import android.util.Xml;
 
 import com.example.test.lottery.ConstantValue;
 import com.example.test.lottery.bean.User;
+import com.example.test.lottery.engine.BaseEngine;
+import com.example.test.lottery.engine.UserEngine;
 import com.example.test.lottery.net.HttpClientUtil;
 import com.example.test.lottery.net.protocal.Message;
 import com.example.test.lottery.net.protocal.element.UserLoginElement;
@@ -16,7 +18,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 
 
-public class UserEngineInpl extends BaseEngine {
+public class UserEngineInpl extends BaseEngine  implements UserEngine {
     public Message login(User user) {
         //第一步：获取登陆用xml
         //创建登陆用Element
