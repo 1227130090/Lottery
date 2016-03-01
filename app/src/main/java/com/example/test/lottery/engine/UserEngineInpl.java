@@ -15,11 +15,65 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.InputStream;
 import java.io.StringReader;
 
-/**
- * Created by test on 2016/2/27.
- */
-public class UserEngineInpl {
+
+public class UserEngineInpl extends BaseEngine {
     public Message login(User user) {
+        //第一步：获取登陆用xml
+        //创建登陆用Element
+        UserLoginElement element = new UserLoginElement();
+        //设置用户数据
+        element.getActpassword().setTagValue(user.getPassword());
+        //Message.getXml（element）
+        Message message = new Message();
+        message.getHeader().getUsername().setTagValue(user.getUsername());
+        String xml = message.getXml(element);
+        //如果第三步比对通过否则返回空
+
+        Message result = getresult(xml);
+
+        if (result != null) {
+
+
+            //第四步请求结果的数据处理
+            //body部分的第二次解析，解析的明文内容
+            XmlPullParser parser = Xml.newPullParser();
+            try {
+                DES des = new DES();
+                String body = "<body>" + des.authcode(result.getBody().getServicebodyInsideDESInfo(), "ENCODE", ConstantValue.DES_PASSWORD) + "<body>";
+
+                parser.setInput(new StringReader(body));
+                int eventType = parser.getEventType();
+                String name;
+
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    switch (eventType) {
+                        case XmlPullParser.START_TAG:
+                            name = parser.getName();
+                            if ("errorcode".equals(name)) {
+                                result.getBody().getOelemet().setErrorcode(parser.nextText());
+                            }
+                            if ("errormsg".equals(name)) {
+                                result.getBody().getOelemet().setErrormsg(parser.nextText());
+
+                            }
+                            break;
+                    }
+                    eventType = parser.next();
+                }
+                return result;
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+        }
+        return null;
+    }
+
+
+
+
+    public Message login1(User user) {
         //第一步：获取登陆用xml
         //创建登陆用Element
         UserLoginElement element = new UserLoginElement();
@@ -116,4 +170,5 @@ public class UserEngineInpl {
         return null;
 
     }
+
 }
