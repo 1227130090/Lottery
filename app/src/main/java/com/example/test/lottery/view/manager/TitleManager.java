@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.test.lottery.R;
+import com.example.test.lottery.view.SecondUI;
 
 /**
  * 管理标题的工具
@@ -68,9 +69,16 @@ public class TitleManager {
             public void onClick(View v) {
                 System.out.println("help");
 
+
             }
         });
 
+        login.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MiddleManager.getInstance().changeUI(new SecondUI(MiddleManager.getInstance().getContext()));
+            }
+        });
 
     }
 

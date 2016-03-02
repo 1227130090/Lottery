@@ -17,7 +17,9 @@ import com.example.test.lottery.R;
  */
 public class BottomManager {
     protected static final String TAG = "BottomManager";
-    /******************* 第一步：管理对象的创建(单例模式) ***************************************************/
+    /*******************
+     * 第一步：管理对象的创建(单例模式)
+     ***************************************************/
     // 创建一个静态实例
     private static BottomManager instrance;
 
@@ -36,21 +38,29 @@ public class BottomManager {
     /*********************************************************************************************/
     /******************* 第二步：初始化各个导航容器及相关控件设置监听 *********************************/
 
-    /********** 底部菜单容器 **********/
+    /**********
+     * 底部菜单容器
+     **********/
     private RelativeLayout bottomMenuContainer;
-    /************ 底部导航 ************/
+    /************
+     * 底部导航
+     ************/
     private LinearLayout commonBottom;// 购彩通用导航
     private LinearLayout playBottom;// 购彩
 
     /***************** 导航按钮 ******************/
 
-    /************ 购彩导航底部按钮及提示信息 ************/
+    /************
+     * 购彩导航底部按钮及提示信息
+     ************/
     private ImageButton cleanButton;
     private ImageButton addButton;
 
     private TextView playBottomNotice;
 
-    /************ 通用导航底部按钮 ************/
+    /************
+     * 通用导航底部按钮
+     ************/
     private ImageButton homeButton;
     private ImageButton hallButton;
     private ImageButton rechargeButton;
