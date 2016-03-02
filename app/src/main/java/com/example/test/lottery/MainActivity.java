@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 
         @Override
         public void handleMessage(Message msg) {
-            loadSecondUI();//加载第二个界面
+            changeUI();//加载第二个界面
             super.handleMessage(msg);
         }
     };
@@ -52,16 +52,29 @@ public class MainActivity extends Activity {
 
     }
 
+    View child1;
+
     private void loadFirstUI() {
         FirstUI firstUI = new FirstUI(this);
-        View child = firstUI.getChild();
-        middle.addView(child);
+        child1 = firstUI.getChild();
+        middle.addView(child1);
     }
     //当第一个界面加载完2秒钟后，第二个界面显示
 
     private void loadSecondUI() {
         SecondUI secondUI = new SecondUI(this);
         View child = secondUI.getChild();
+        //切换界面核心方法
         middle.addView(child);//中间容器加载
+    }
+
+    //切换界面
+    protected void changeUI() {
+        //1.切换界面时清理上一个显示内容
+        //切换界面和新方法一
+        middle.removeAllViews();//全删
+//        middle.removeView(child1);//只删除一个
+        loadSecondUI();
+
     }
 }
