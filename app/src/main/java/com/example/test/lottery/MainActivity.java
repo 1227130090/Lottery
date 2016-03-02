@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import com.example.test.lottery.util.FadeUtil;
+import com.example.test.lottery.view.BaseUI;
 import com.example.test.lottery.view.FirstUI;
 import com.example.test.lottery.view.SecondUI;
 import com.example.test.lottery.view.manager.BottomManager;
@@ -22,7 +24,9 @@ public class MainActivity extends Activity {
 
         @Override
         public void handleMessage(Message msg) {
-            changeUI();//加载第二个界面
+            //changeUI();//加载第二个界面
+            changeUI(new SecondUI(MainActivity.this));
+
             super.handleMessage(msg);
         }
     };
@@ -71,6 +75,17 @@ public class MainActivity extends Activity {
         //执行切换动画
         FadeUtil.fadeIn(child,2000,1000);
         //child.startAnimation(AnimationUtils.loadAnimation(this, R.anim.ia_view_change));
+    }
+
+    protected void changeUI(BaseUI ui)
+    {
+        //切换界面核心代码
+
+        middle.removeAllViews();
+        View child =ui.getChild();
+        middle.addView(child);
+        child.startAnimation(AnimationUtils.loadAnimation(this,R.anim.ia_view_change));
+
     }
 
     //切换界面

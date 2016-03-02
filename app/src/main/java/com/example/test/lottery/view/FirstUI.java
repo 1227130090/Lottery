@@ -13,21 +13,21 @@ import android.widget.TextView;
  * /**
  * 第一个 简单的界面
  */
-public class FirstUI {
+public class FirstUI extends BaseUI {
 
     //传递上下文
-    private Context content;
+
 
     public FirstUI(Context content) {
-        super();
-        this.content = content;
+        super(content);
+
     }
 
     //获取需要在中间容器加载的空间
     public View getChild() {
 
         //简单界面：
-        TextView textView = new TextView(content);
+        TextView textView = new TextView(context);
 
         LayoutParams layoutParams = textView.getLayoutParams();
         layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);

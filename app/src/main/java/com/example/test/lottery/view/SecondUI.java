@@ -4,18 +4,17 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-
 import android.widget.TextView;
 
 /**
  * Created by test on 2016/3/2.
  */
-public class SecondUI {
+public class SecondUI extends BaseUI{
 
-    private Context context;
+
     public SecondUI(Context context){
-        super();
-        this.context= context;
+        super(context);
+
     }
 
 
