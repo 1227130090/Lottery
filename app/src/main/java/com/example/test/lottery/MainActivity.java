@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
+import com.example.test.lottery.util.FadeUtil;
 import com.example.test.lottery.view.FirstUI;
 import com.example.test.lottery.view.SecondUI;
 import com.example.test.lottery.view.manager.BottomManager;
@@ -69,15 +69,17 @@ public class MainActivity extends Activity {
         middle.addView(child);//中间容器加载
 
         //执行切换动画
-        child.startAnimation(AnimationUtils.loadAnimation(this ,R.anim.ia_view_change));
+        FadeUtil.fadeIn(child,2000,1000);
+        //child.startAnimation(AnimationUtils.loadAnimation(this, R.anim.ia_view_change));
     }
 
     //切换界面
     protected void changeUI() {
         //1.切换界面时清理上一个显示内容
         //切换界面和新方法一
-        middle.removeAllViews();//全删
-//        middle.removeView(child1);//只删除一个
+       // middle.removeAllViews();//全删
+        FadeUtil.fadeOut(child1,2000);
+        //middle.removeView(child1);//只删除一个
         loadSecondUI();
 
     }
