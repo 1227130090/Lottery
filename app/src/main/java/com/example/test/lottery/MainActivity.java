@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         init();
     }
     private void init(){
-        TitleManager manager =new TitleManager();
+        TitleManager manager = TitleManager.getInstance();
         manager.init(this);
         manager.showUnloginTitle();
     }

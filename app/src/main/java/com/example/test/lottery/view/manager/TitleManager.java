@@ -14,6 +14,13 @@ import com.example.test.lottery.R;
 public class TitleManager {
     //显示和隐藏
 
+    private static TitleManager instance;
+    private TitleManager(){}
+
+    public static TitleManager getInstance() {
+        return instance;
+    }
+
     private RelativeLayout commonContainer;
     private RelativeLayout loginContainer;
     private RelativeLayout unLoginContainer;
