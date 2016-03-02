@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
 import com.example.test.lottery.view.FirstUI;
@@ -64,8 +65,11 @@ public class MainActivity extends Activity {
     private void loadSecondUI() {
         SecondUI secondUI = new SecondUI(this);
         View child = secondUI.getChild();
-        //切换界面核心方法
+        //切换界面核心方法二
         middle.addView(child);//中间容器加载
+
+        //执行切换动画
+        child.startAnimation(AnimationUtils.loadAnimation(this ,R.anim.ia_view_change));
     }
 
     //切换界面
