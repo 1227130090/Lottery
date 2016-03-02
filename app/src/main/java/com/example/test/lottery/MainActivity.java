@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 
         middle = (RelativeLayout) findViewById(R.id.ii_middle);
         MiddleManager.getInstance().setMiddle(middle);
-        MiddleManager.getInstance().changeUI(new FirstUI(this));
+        MiddleManager.getInstance().changeUI(FirstUI.class);
         //当第一个界面加载完2秒钟后，第二个界面显示
 //        handler.sendEmptyMessageDelayed(110, 2000);
 

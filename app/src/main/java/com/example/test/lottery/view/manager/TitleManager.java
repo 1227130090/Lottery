@@ -76,7 +76,9 @@ public class TitleManager {
         login.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                MiddleManager.getInstance().changeUI(new SecondUI(MiddleManager.getInstance().getContext()));
+               // SecondUI secondUI=new SecondUI(MiddleManager.getInstance().getContext());
+                MiddleManager.getInstance().changeUI(SecondUI.class);//changeUI需要修改，不能传递对象，但是又要明确对象
+
             }
         });
 
