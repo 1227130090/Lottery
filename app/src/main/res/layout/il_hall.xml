@@ -34,25 +34,22 @@
     </LinearLayout>
 
     <ScrollView
+
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
 
-        -
-
         <LinearLayout
+
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
             <!-- 双色球 -->
 
-
-            -
-
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:background="@drawable/id_item_bg"
                 android:orientation="horizontal">
 
@@ -112,7 +109,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:background="@drawable/id_item_bg"
                 android:orientation="horizontal">
 
@@ -172,7 +169,7 @@
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:background="@drawable/id_item_bg"
                 android:orientation="horizontal">
 
