@@ -8,9 +8,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.test.lottery.util.FadeUtil;
+import com.example.test.lottery.util.PromptManager;
 import com.example.test.lottery.view.BaseUI;
 import com.example.test.lottery.view.FirstUI;
 import com.example.test.lottery.view.SecondUI;
@@ -126,7 +126,8 @@ public class MainActivity extends Activity {
             boolean result = MiddleManager.getInstance().goBakc();
             //返回键操作失败
             if (!result){
-                Toast.makeText(MainActivity.this,"是否退出系统",Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this,"是否退出系统",Toast.LENGTH_LONG).show();
+                PromptManager.showExitSystem(this);
             }
 
             return false;
