@@ -7,27 +7,21 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.test.lottery.ConstantValue;
 import com.example.test.lottery.R;
 import com.example.test.lottery.view.SecondUI;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * 管理标题的工具
  */
-public class TitleManager implements Observer {
+public class TitleManager1 {
     // 显示和隐藏
 
-    private static TitleManager instance = new TitleManager();
+    private static TitleManager1 instance = new TitleManager1();
 
-    private TitleManager() {
+    private TitleManager1() {
     }
 
-    public static TitleManager getInstance() {
+    public static TitleManager1 getInstance() {
         return instance;
     }
 
@@ -123,20 +117,5 @@ public class TitleManager implements Observer {
 
     public void changeTitle(String title) {
         titleContent.setText(title);
-    }
-
-    @Override
-    public void update(Observable observable, Object data) {
-        if (data!=null&& StringUtils.isNumeric(data.toString())){//判断是不是数字
-            int id=Integer.parseInt(data.toString());
-            switch (id){
-                case ConstantValue.VIEW_FIRST:
-                    showUnLoginTitle();
-                    break;
-                case ConstantValue.VIEW_SECOND:
-                   showCommonTitle();
-            }
-        }
-
     }
 }

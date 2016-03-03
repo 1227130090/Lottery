@@ -54,7 +54,14 @@ public class MainActivity extends Activity {
 
         middle = (RelativeLayout) findViewById(R.id.ii_middle);
         MiddleManager.getInstance().setMiddle(middle);
+
+        //3.建立观察者和被观察者之间的关系（标题和底部导航添加到观察者容器里）
+        MiddleManager.getInstance().addObserver(TitleManager.getInstance());
+        MiddleManager.getInstance().addObserver(BottomManager.getInstrance());
+
         MiddleManager.getInstance().changeUI(FirstUI.class);
+
+
         //当第一个界面加载完2秒钟后，第二个界面显示
 //        handler.sendEmptyMessageDelayed(110, 2000);
 

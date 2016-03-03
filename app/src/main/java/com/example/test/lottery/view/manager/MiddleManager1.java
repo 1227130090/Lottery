@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
+import com.example.test.lottery.ConstantValue;
 import com.example.test.lottery.R;
 import com.example.test.lottery.view.BaseUI;
 
@@ -14,21 +15,20 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Observable;
 
 /**
  * 中间容器管理工具
  * Created by test on 2016/3/2.
  */
-public class MiddleManager extends Observable {
+public class MiddleManager1 {
 
     private static final String TAG = "MiddleManager";
-    private static MiddleManager instance = new MiddleManager();
+    private static MiddleManager1 instance = new MiddleManager1();
 
-    private MiddleManager() {
+    private MiddleManager1() {
     }
 
-    public static MiddleManager getInstance() {
+    public static MiddleManager1 getInstance() {
         return instance;
     }
 
@@ -119,19 +119,18 @@ public class MiddleManager extends Observable {
 //        }
 
 
-//        //方案二：更换比对依据
-//        switch (currentUI.getID()){
-//            case ConstantValue.VIEW_FIRST:
-//                TitleManager.getInstance().showUnLoginTitle();
-//                BottomManager.getInstrance().showCommonBottom();
-//                break;
-//            case ConstantValue.VIEW_SECOND:
-//                TitleManager.getInstance().showCommonTitle();
-//                BottomManager.getInstrance().showGameBottom();
-//                break;
-        //方案三降低耦合
+        //方案二：更换比对依据
+        switch (currentUI.getID()){
+            case ConstantValue.VIEW_FIRST:
+                TitleManager.getInstance().showUnLoginTitle();
+                BottomManager.getInstrance().showCommonBottom();
+                break;
+            case ConstantValue.VIEW_SECOND:
+                TitleManager.getInstance().showCommonTitle();
+                BottomManager.getInstrance().showGameBottom();
+                break;
 
-//        }
+        }
         //降低三个容器耦合度
         //当中间容器变动的时候，中间容器“通知”其他容器，改变动le，唯一的标识传递，其他容器依据唯一的标识进行容器内的切换
         //通知：
@@ -142,9 +141,7 @@ public class MiddleManager extends Observable {
         //2 标题和底部导航变成观察者
         //3建立观察者和被观察者之间的关系
         //4一点中间容器变动，修改boolean，然后通知所有观察者 。updata（）
-        setChanged();
 
-        notifyObservers(currentUI.getID());
 
     }
 

@@ -9,34 +9,27 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
-import com.example.test.lottery.ConstantValue;
 import com.example.test.lottery.R;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by test on 2016/3/2.
  */
-public class BottomManager implements Observer {
+public class BottomManager1 {
     protected static final String TAG = "BottomManager";
     /*******************
      * 第一步：管理对象的创建(单例模式)
      ***************************************************/
     // 创建一个静态实例
-    private static BottomManager instrance;
+    private static BottomManager1 instrance;
 
     // 构造私有
-    private BottomManager() {
+    private BottomManager1() {
     }
 
     // 提供统一的对外获取实例的入口
-    public static BottomManager getInstrance() {
+    public static BottomManager1 getInstrance() {
         if (instrance == null) {
-            instrance = new BottomManager();
+            instrance = new BottomManager1();
         }
         return instrance;
     }
@@ -148,22 +141,6 @@ public class BottomManager implements Observer {
      */
     public void changeGameBottomNotice(String notice) {
         playBottomNotice.setText(notice);
-    }
-
-    @Override
-    public void update(Observable observable, Object data) {
-        if (data!=null&& StringUtils.isNumeric(data.toString())){
-            int id =Integer.parseInt(data.toString());
-            switch (id){
-                case ConstantValue.VIEW_FIRST:
-                    showCommonBottom();
-                    break;
-                case ConstantValue.VIEW_SECOND:
-                    showGameBottom();
-                    break;
-            }
-        }
-
     }
     /*********************************************************************************************/
 }
