@@ -37,12 +37,23 @@ public class MiddleManager {
     }
 
     //存储 创建过 的集合  用来存储
+    //  利用手机的内存空间，换应用速度
     private Map<String, BaseUI> VIEWCACHE = new HashMap<String, BaseUI>();//K:唯一标识BaseUI子类
 
+
+    private BaseUI currentUI;// 当前正在 展示de
     /**
-     * 切换界面: 解决问题：“在标题容器中每次点击都在创建一个目标界面”
+     * 切换界面: 解决问题：判断当前正在展示的界面和要切换的界面是否相同
+     *
      */
     public void changeUI(Class<? extends BaseUI> targetClazz) {
+
+    if (currentUI!=null&&currentUI.getClass()==targetClazz){
+        return;
+    }
+
+
+
         BaseUI targetUI=null;
         //一旦创建过，重用
         //判断是否创建了——曾经创建过的界面需要存储
@@ -69,7 +80,8 @@ public class MiddleManager {
         View child = targetUI.getChild();
         middle.addView(child);
         child.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.ia_view_change));
-        // FadeUtil.fadeIn(child, 2000, 1000);
+        // FadeUtil.fadeIn(child, 2000, 1000)
+        currentUI = targetUI;
 
     }
 
@@ -82,6 +94,31 @@ public class MiddleManager {
         child.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.ia_view_change));
         // FadeUtil.fadeIn(child, 2000, 1000);
 
+
+    }
+    /**
+     * 切换界面: 解决问题：“在标题容器中每次点击都在创建一个目标界面”
+     */
+    public void changeUI2(Class<? extends BaseUI> targetClazz) {
+        BaseUI targetUI = null;
+        //一旦创建过，重用
+        //判断是否创建了——曾经创建过的界面需要存储
+        String key = targetClazz.getSimpleName();
+        if (VIEWCACHE.containsKey(key)) {
+            //创建了，重用
+            targetUI = VIEWCACHE.get(key);
+        } else {
+            //否则，创建
+
+            Constructor<? extends BaseUI> constructor;
+            try {
+                constructor = targetClazz.getConstructor(Context.class);
+                targetUI = constructor.newInstance(getContext());
+                VIEWCACHE.put(key, targetUI);
+            } catch (Exception e) {
+                throw new RuntimeException("constructor new instance error");
+            }
+        }
     }
 
     public Context getContext() {
