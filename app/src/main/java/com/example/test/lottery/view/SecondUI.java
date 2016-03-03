@@ -15,7 +15,7 @@ public class SecondUI extends BaseUI{
 
     public SecondUI(Context context){
         super(context);
-        init();
+        init();//放在构造器里只用一次
 
     }
 

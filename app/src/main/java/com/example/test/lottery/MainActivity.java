@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.test.lottery.util.FadeUtil;
 import com.example.test.lottery.view.BaseUI;
@@ -99,5 +101,34 @@ public class MainActivity extends Activity {
         //middle.removeView(child1);//只删除一个
         loadSecondUI();
 
+    }
+    /**
+     * a。用户 返回键捕捉
+     * b。响应返回键--切换到历史界面
+     * 记录一下用户操作历史
+     * 频繁操作历史
+     * 获取了栈顶
+     * 有序集合
+     *
+     * LinkedList<String >-----AndroidStack
+     * */
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            boolean result = MiddleManager.getInstance().goBakc();
+            //返回键操作失败
+            if (!result){
+                Toast.makeText(MainActivity.this,"是否退出系统",Toast.LENGTH_LONG).show();
+            }
+
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

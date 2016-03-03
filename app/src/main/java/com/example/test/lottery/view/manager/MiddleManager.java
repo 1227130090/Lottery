@@ -12,6 +12,7 @@ import com.example.test.lottery.view.BaseUI;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -41,6 +42,7 @@ public class MiddleManager {
     private Map<String, BaseUI> VIEWCACHE = new HashMap<String, BaseUI>();//K:唯一标识BaseUI子类
 
 
+    private LinkedList<String> HISTORY=new LinkedList<String>();//用户 操作历史纪录
     private BaseUI currentUI;// 当前正在 展示de
     /**
      * 切换界面: 解决问题：判断当前正在展示的界面和要切换的界面是否相同
@@ -83,6 +85,9 @@ public class MiddleManager {
         // FadeUtil.fadeIn(child, 2000, 1000)
         currentUI = targetUI;
 
+        //将当前显示的界面放到栈顶
+        HISTORY.addFirst(key);
+
     }
 
     public void changeUI1(BaseUI ui) {
@@ -123,5 +128,38 @@ public class MiddleManager {
 
     public Context getContext() {
         return middle.getContext();
+    }
+
+
+    //返回键的处理
+    public boolean goBakc() {
+        /**
+         * 记录一下操作历史
+         * 频繁操作栈顶（添加）-界面切换成功
+         * 获取栈顶
+         * 删除了栈顶
+         * 有序集合
+         *
+         * */
+        if (HISTORY.size()>0) {
+            //当用户误操作到返回键（不退出应用）
+            //留一个界面
+            
+            if (HISTORY.size()==1){
+                return false;
+            }
+
+            HISTORY.removeFirst();
+            if (HISTORY.size()>0) {
+                String key = HISTORY.getFirst();
+                BaseUI targetUI = VIEWCACHE.get(key);
+                middle.removeAllViews();
+                middle.addView(targetUI.getChild());
+                currentUI = targetUI;
+                return true;
+            }
+
+        }
+        return false;
     }
 }
