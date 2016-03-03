@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
+import com.example.test.lottery.ConstantValue;
 import com.example.test.lottery.R;
 import com.example.test.lottery.view.BaseUI;
 
@@ -42,40 +43,45 @@ public class MiddleManager {
     private Map<String, BaseUI> VIEWCACHE = new HashMap<String, BaseUI>();//K:唯一标识BaseUI子类
 
 
-    private LinkedList<String> HISTORY=new LinkedList<String>();//用户 操作历史纪录
+    private LinkedList<String> HISTORY = new LinkedList<String>();//用户 操作历史纪录
+
+
     private BaseUI currentUI;// 当前正在 展示de
+
+    /**
+     * 切换界面：解决问题“三个容器的联动”
+     *
+     * */
     /**
      * 切换界面: 解决问题：判断当前正在展示的界面和要切换的界面是否相同
-     *
      */
     public void changeUI(Class<? extends BaseUI> targetClazz) {
 
-    if (currentUI!=null&&currentUI.getClass()==targetClazz){
-        return;
-    }
+        if (currentUI != null && currentUI.getClass() == targetClazz) {
+            return;
+        }
 
 
-
-        BaseUI targetUI=null;
+        BaseUI targetUI = null;
         //一旦创建过，重用
         //判断是否创建了——曾经创建过的界面需要存储
         String key = targetClazz.getSimpleName();
         if (VIEWCACHE.containsKey(key)) {
-         //创建了，重用
-            targetUI=VIEWCACHE.get(key);
-        }else {
+            //创建了，重用
+            targetUI = VIEWCACHE.get(key);
+        } else {
             //否则，创建
 
             Constructor<? extends BaseUI> constructor;
             try {
                 constructor = targetClazz.getConstructor(Context.class);
-                targetUI=constructor.newInstance(getContext());
-                VIEWCACHE.put(key,targetUI);
+                targetUI = constructor.newInstance(getContext());
+                VIEWCACHE.put(key, targetUI);
             } catch (Exception e) {
-               throw new RuntimeException("constructor new instance error");
+                throw new RuntimeException("constructor new instance error");
             }
         }
-        Log.i(TAG,targetUI.toString());
+        Log.i(TAG, targetUI.toString());
         //切换界面核心代码
         middle.removeAllViews();
         // FadeUtil.fadeOut(child1, 2000);
@@ -88,7 +94,46 @@ public class MiddleManager {
         //将当前显示的界面放到栈顶
         HISTORY.addFirst(key);
 
+        //当切换成功是，处理另外的两个容器的变化
+        changeTitleAndBorrom();
     }
+
+    private void changeTitleAndBorrom() {
+        //1。界面一对应未登录标题和通用导航
+
+        //2.界面对应通用标题和玩法导航
+        //当前正在展示如果是第一个界面，
+
+        //方案1：存在问题，比对的依据：名称或者字节码
+        //在界面处理初期，将所有的界面的名称确定下来
+        //如果是字节码，将所有的界面都得创建完成
+//        if (currentUI.getClass().getSimpleName().equals("FirstUI")){//currentUI.getClass()==FirstUI.class
+//            TitleManager.getInstance().showUnLoginTitle();
+//            BottomManager.getInstrance().showCommonBottom();
+//
+//        }
+//        if (currentUI.getClass().getSimpleName().equals("SecondUI")){
+//            TitleManager.getInstance().showCommonTitle();
+//            BottomManager.getInstrance().showGameBottom();
+//
+//        }
+
+
+        //方案二：更换比对依据
+        switch (currentUI.getID()){
+            case ConstantValue.VIEW_FIRST:
+                TitleManager.getInstance().showUnLoginTitle();
+                BottomManager.getInstrance().showCommonBottom();
+                break;
+            case ConstantValue.VIEW_SECOND:
+                TitleManager.getInstance().showCommonTitle();
+                BottomManager.getInstrance().showGameBottom();
+                break;
+
+        }
+
+    }
+
 
     public void changeUI1(BaseUI ui) {
         //切换界面核心代码
@@ -101,6 +146,7 @@ public class MiddleManager {
 
 
     }
+
     /**
      * 切换界面: 解决问题：“在标题容器中每次点击都在创建一个目标界面”
      */
@@ -141,25 +187,27 @@ public class MiddleManager {
          * 有序集合
          *
          * */
-        if (HISTORY.size()>0) {
+        if (HISTORY.size() > 0) {
             //当用户误操作到返回键（不退出应用）
             //留一个界面
-            
-            if (HISTORY.size()==1){
+
+            if (HISTORY.size() == 1) {
                 return false;
             }
 
             HISTORY.removeFirst();
-            if (HISTORY.size()>0) {
+            if (HISTORY.size() > 0) {
                 String key = HISTORY.getFirst();
                 BaseUI targetUI = VIEWCACHE.get(key);
                 middle.removeAllViews();
                 middle.addView(targetUI.getChild());
                 currentUI = targetUI;
+                changeTitleAndBorrom();
                 return true;
             }
 
         }
         return false;
     }
+
 }

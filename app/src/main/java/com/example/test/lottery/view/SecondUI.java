@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.test.lottery.ConstantValue;
+
 /**
  * Created by test on 2016/3/2.
  */
@@ -36,5 +38,10 @@ public class SecondUI extends BaseUI{
 
 
         return textView;
+    }
+
+    @Override
+    public int getID() {
+        return ConstantValue.VIEW_SECOND;
     }
 }

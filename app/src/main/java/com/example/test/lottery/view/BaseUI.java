@@ -18,4 +18,8 @@ public abstract class BaseUI {
      *
      * */
     public abstract View getChild();
+
+    //获取每个界面的标识--容器联动的比对依据
+    public abstract  int getID();
+
 }

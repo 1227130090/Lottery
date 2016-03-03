@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 
+import com.example.test.lottery.ConstantValue;
+
 
 /**
  * import org.w3c.dom.Text;
@@ -38,6 +40,11 @@ public class FirstUI extends BaseUI {
 
         return textView;
 
+    }
+
+    @Override
+    public int getID() {
+        return ConstantValue.VIEW_FIRST;
     }
 
 }
