@@ -6,12 +6,8 @@
 <!-- corners    圆角。 -->
 <!-- padding    定义内容离边界的距离。 与android:padding_left、android:padding_right这些是一个道理。 -->
 
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle" >
+<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <gradient
-        android:angle="270"
-        android:endColor="#FFFFFF"
-        android:startColor="#E7E7E7" />
+    <gradient android:startColor="#E7E7E7" android:endColor="#FFFFFF" android:angle="270"/>
 
 </shape>
