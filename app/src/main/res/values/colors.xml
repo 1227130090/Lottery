@@ -57,4 +57,10 @@
     <color name="black_slight">#212121</color>
 
     <color name="green">#30690B</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="colorAccent">#FF4081</color>
 </resources>

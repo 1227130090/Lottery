@@ -37,6 +37,8 @@ public interface ConstantValue {
 	//标识符依据
 	int VIEW_FIRST=1;
 	int VIEW_SECOND=2;
+
+
 	
 	/**
 	 * 购彩大厅

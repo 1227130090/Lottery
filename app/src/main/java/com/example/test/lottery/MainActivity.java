@@ -13,6 +13,7 @@ import com.example.test.lottery.util.FadeUtil;
 import com.example.test.lottery.util.PromptManager;
 import com.example.test.lottery.view.BaseUI;
 import com.example.test.lottery.view.FirstUI;
+import com.example.test.lottery.view.Hall;
 import com.example.test.lottery.view.SecondUI;
 import com.example.test.lottery.view.manager.BottomManager;
 import com.example.test.lottery.view.manager.MiddleManager;
@@ -59,7 +60,8 @@ public class MainActivity extends Activity {
         MiddleManager.getInstance().addObserver(TitleManager.getInstance());
         MiddleManager.getInstance().addObserver(BottomManager.getInstrance());
 
-        MiddleManager.getInstance().changeUI(FirstUI.class);
+//        MiddleManager.getInstance().changeUI(FirstUI.class);
+        MiddleManager.getInstance().changeUI(Hall.class);
 
 
         //当第一个界面加载完2秒钟后，第二个界面显示

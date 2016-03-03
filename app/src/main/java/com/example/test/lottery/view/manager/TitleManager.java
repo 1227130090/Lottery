@@ -131,6 +131,7 @@ public class TitleManager implements Observer {
             int id=Integer.parseInt(data.toString());
             switch (id){
                 case ConstantValue.VIEW_FIRST:
+                case ConstantValue.VIEW_HALL:
                     showUnLoginTitle();
                     break;
                 case ConstantValue.VIEW_SECOND:
