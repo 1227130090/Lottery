@@ -20,6 +20,14 @@ public class Hall extends BaseUI{
 
     private void init() {
         showInMiddle= (LinearLayout) View.inflate(context, R.layout.il_hall,null);
+        //root=null
+//        showInMiddle.getLayoutParams()=null;
+        //root!=null
+        //return root
+        if (showInMiddle.getLayoutParams()==null){
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+            showInMiddle.setLayoutParams(params);
+        }
     }
 
     @Override
