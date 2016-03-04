@@ -20,6 +20,16 @@ public class FirstUI extends BaseUI {
     //传递上下文
 
 
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void init() {
+
+    }
+
     public FirstUI(Context content) {
         super(content);
 

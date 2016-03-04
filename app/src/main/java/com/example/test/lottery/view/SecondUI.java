@@ -17,12 +17,15 @@ public class SecondUI extends BaseUI{
 
     public SecondUI(Context context){
         super(context);
-        init();//放在构造器里只用一次
+    }
+
+    @Override
+    public void setListener() {
 
     }
 
     //初始化：调用一次
-    private void init(){
+    public void init(){
         textView =new TextView(context);
         ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
         layoutParams =new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
