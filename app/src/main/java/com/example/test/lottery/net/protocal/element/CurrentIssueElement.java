@@ -14,6 +14,28 @@ public class CurrentIssueElement extends Element {
     private Leaf lotteryid = new Leaf("lotteryid");
     //<issues>1</issues>
     private Leaf issues = new Leaf("issues", "1");
+    /**********************服务器回复**********************/
+
+    private String issue;
+    private String lasstime;
+
+    public String getIssue() {
+        return issue;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
+    public String getLasstime() {
+        return lasstime;
+    }
+
+    public void setLasstime(String lasstime) {
+        this.lasstime = lasstime;
+    }
+
+    /***************************************************/
 
 
     @Override

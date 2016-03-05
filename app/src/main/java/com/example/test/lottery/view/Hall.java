@@ -8,8 +8,15 @@ import android.widget.TextView;
 
 import com.example.test.lottery.ConstantValue;
 import com.example.test.lottery.R;
+import com.example.test.lottery.engine.CommonInfoEngine;
+import com.example.test.lottery.net.protocal.Element;
 import com.example.test.lottery.net.protocal.Message;
+import com.example.test.lottery.net.protocal.Oelemet;
+import com.example.test.lottery.net.protocal.element.CurrentIssueElement;
 import com.example.test.lottery.util.BeanFactory;
+import com.example.test.lottery.util.PromptManager;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by test on 2016/3/3.
@@ -70,13 +77,43 @@ public class Hall extends BaseUI {
             }
 
             @Override
-            protected void onPostExecute(Message message) {
+            protected void onPostExecute(Message result) {
                 //更新界面
-                super.onPostExecute(message);
+                if (result!=null){
+                  Oelemet oelemt= result.getBody().getOelemet();
+
+                    if (ConstantValue.SUCCESS.equals(oelemt.getErrorcode())){
+                        //修改界面
+                        changeNorice(result.getBody().getElements().get(0));
+
+                    }else{
+                        PromptManager.showToast(context,oelemt.getErrormsg());
+                    }
+                }else{
+                    //网络不通/权限没加/服务器/
+                    //如何提示用户
+                    PromptManager.showToast(context,"服务器忙，请稍后重试");
+                }
+
+                super.onPostExecute(result);
             }
         }.executeProxy(ConstantValue.SSQ);
 
 
+    }
+/*
+* 修改界面
+*
+* */
+    private void changeNorice(Element element) {
+        CurrentIssueElement currentIssueElement = (CurrentIssueElement) element;
+        String issue= currentIssueElement.getIssue();
+        String  lasttime= currentIssueElement.getLasstime();
+        //第ISSUE期，还有TIME停售
+        String text=context.getResources().getString(R.string.is_hall_common_summary);
+        text= StringUtils.replaceEach(text, new String[]{"ISSUE","TIME"}, new String[]{issue,lasttime});
+
+                ssqIssue.setText(text);
     }
 }
  /*   *//**
