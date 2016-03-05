@@ -1,9 +1,14 @@
 package com.example.test.lottery.view;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.example.test.lottery.net.NetUtil;
+import com.example.test.lottery.net.protocal.Message;
+import com.example.test.lottery.util.PromptManager;
 
 /**
  * Created by test on 2016/3/2.
@@ -57,4 +62,19 @@ public abstract class BaseUI implements View.OnClickListener {
     public View findViewById(int id){
         return showInMiddle.findViewById(id);
     }
+
+    protected  abstract class MyHttpTask<Params> extends AsyncTask<Params,Void,Message>{
+
+
+        public  final AsyncTask<Params,Void,Message> executeProxy(Params... params){
+            if (NetUtil.checkNet(context)){
+                return super.execute(params);
+            }else {
+                PromptManager.showNoNetWork(context);
+            }
+            return null;
+        }
+
+    }
+
 }
